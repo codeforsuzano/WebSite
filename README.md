@@ -2,7 +2,7 @@
 
 Um modelo de página de destino.
 
-* [Começar](#getting-started)
+* [Começar](#Começar...)
 
 ## Começar...
 

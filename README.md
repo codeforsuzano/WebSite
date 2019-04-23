@@ -2,9 +2,9 @@
 
 Um modelo de página de destino.
 
-* [Getting started](#getting-started)
+* [Começar](#getting-started)
 
-## Getting started
+## Começar...
 
 * Primeiro, assegure-se de que node.js & npm estejam instalados. Caso contrário, escolha o sistema operacional e o método de instalação em [this page] (https://nodejs.org/en/download/package-manager/) e siga as instruções.
 * Em seguida, use sua linha de comando para entrar no diretório do seu projeto.

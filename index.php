@@ -416,39 +416,41 @@
 	<!-- Modal contato -->
 	<div class="modal fade" id="modal-contato" tabindex="-1" role="dialog" aria-labelledby="modal-contatoTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h5 class="modal-title text-center" id="exampleModalLongTitle">Entre em contato =D</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			</div>
-			<form class="form-inline" action="enviar_email.php" method="POST"> 
-				<div class="modal-body">
-					<div class="form-group mx-sm-2 mb-2">
-						<label class="mr-5">Nome</label>
-						<input type="nome" class="form-control" name="nome" id="nome" placeholder="Nome">
-					</div>
-					
-					<div class="form-group mx-sm-2 mb-2 mt-2">
-						<label class="mr-5">E-mail</label>
-						<input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
-					</div>
-					
-					<div class="form-group mx-sm-2 mb-2 mt-2">
-						<label class="mr-3">Mensagem</label>
-						<textarea class="form-control" name="mensagem" id="mensagem" rows="3" col="3"></textarea>
-					</div>
-											
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-center" id="exampleModalLongTitle">Entre em contato =D</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-outline-primary enviarAction" data-dismiss="modal">Enviar mensagem</button>
+				<form class="form-inline" action="index.php" method="POST"> 
+					<div class="modal-body">
+						<div class="form-group mx-sm-2 mb-2">
+							<label class="mr-5">Nome</label>
+							<input type="nome" class="form-control" name="nome" id="nome" placeholder="Nome">
+						</div>
+						
+						<div class="form-group mx-sm-2 mb-2 mt-2">
+							<label class="mr-5">E-mail</label>
+							<input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
+						</div>
+						
+						<div class="form-group mx-sm-2 mb-2 mt-2">
+							<label class="mr-3">Mensagem</label>
+							<textarea class="form-control" name="mensagem" id="mensagem" rows="3" col="3"></textarea>
+						</div>
+												
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-outline-primary enviarAction" >Enviar mensagem</button>
+					</div>
 				</form>
 			</div>
 		</div>
-		</div>
 	</div>
+
+	<span style="display:none;"><?php include('enviar_email.php'); ?></span>
 	<!-- Fim Modal contato -->
 
 	<script src="dist/js/main.min.js"></script>
@@ -459,11 +461,11 @@
 
 	<script>
     $(function () {
-    $('body').on('click', '.enviarAction', function (e) {
-        $(this.form).submit();
-        $('#myModal').modal('hide');
-    });
-});
+		$('body').on('click', '.enviarAction', function (e) {
+			$(this.form).submit();
+			$('#myModal').modal('hide');
+		});
+	});
 </script>
 </body>
 

@@ -1,67 +1,52 @@
 <?php
+    
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 	
 	$nome = $_POST['nome'];
 	$email = $_POST['email'];
-	$mensagem = $_POST['mensagem'];
+    $mensagem = $_POST['mensagem'];
 
-	$arquivo = "
-  <style type='text/css'>
-  body {
-  margin:0px;
-  font-family:Verdane;
-  font-size:12px;
-  color: #666666;
-  }
-  a{
-  color: #666666;
-  text-decoration: none;
-  }
-  a:hover {
-  color: #FF0000;
-  text-decoration: none;
-  }
-  </style>
-    <html>
-        <table width='510' border='1' cellpadding='1' cellspacing='1' bgcolor='#CCCCCC'>
-            <tr>
-              <td>
-  				<tr>
-                 <td width='500'>Nome:$nome</td>
-                </tr>
-                <tr>
-                  <td width='320'>E-mail:<b>$email</b></td>
-				</tr>
-   
-                <tr>
-                  <td width='320'>Mensagem:$mensagem</td>
-                </tr>
-            </td>
-          </tr>   
-        </table>
-    </html>
-  ";
+// Load Composer's autoloader
+require 'vendor/autoload.php';
 
-	// emails para quem será enviado o formulário
-	$emailenviar = "alvesfernandosantos1@gmail.com";
-	$destino = $emailenviar;
-	$assunto = "Contato pelo Site";
-   
-	// É necessário indicar que o formato do e-mail é html
-	$headers  = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'From: $nome <$email>';
-	//$headers .= "Bcc: $EmailPadrao\r\n";
-	 
-	$enviaremail = mail($destino, $assunto, $arquivo, $headers);
-	if($enviaremail){
-	$mgm = "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
-	echo " <meta http-equiv='refresh' content='10;URL=contato.php'>";
-	} else {
-	$mgm = "ERRO AO ENVIAR E-MAIL!";
-	echo "";
-	}
-  ?>
- 
+// Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+    $mail->isSMTP();                                            // Set mailer to use SMTP
+    $mail->Host       = 'smtp.mailtrap.io';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = '5efbd653bcfb9b';                     // SMTP username
+    $mail->Password   = 'ad759c7af9f4cd';                               // SMTP password
+    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->Port       = 587;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('code4suzano@gmail.com', 'Mailer');
+    $mail->addAddress($email, $nome);     // Add a recipient 
+    // $mail->addReplyTo('alvesfernandosantos1@gmail.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
 
 
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Sugestão Code4Suzano';
+    $mail->Body    = "<h2> $mensagem</h2>";
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
+    $mail->send();
+    
+    echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Email enviado com sucesso, Obrigado por entrar em contato.')
+    window.location.href='index.php';
+    </SCRIPT>");
+
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+?>
